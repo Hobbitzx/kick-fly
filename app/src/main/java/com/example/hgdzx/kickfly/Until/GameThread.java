@@ -17,8 +17,8 @@ public class GameThread extends Thread
     {
         while (!Thread.currentThread().isInterrupted() && mGv.gameLoop)
         {
-            mGv.doPaint();
             mGv.doUpdate();
+            mGv.doPaint();
         }
         Log.i(ActivityUtil.infoMessage, "GameThread Over");
     }

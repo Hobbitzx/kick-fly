@@ -7,6 +7,7 @@ import com.example.hgdzx.kickfly.Until.GameObjData;
 import com.example.hgdzx.kickfly.Until.GameThread;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -15,8 +16,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder.Callback;
 
-public class GameView extends SurfaceView implements Callback
-{
+public class GameView extends SurfaceView implements Callback {
 
     public static final int GAME_STATE_RUN = 1;// 游戏状态：运行
     public static final int GAME_STATE_OVER = 0;// 游戏状态：结束
@@ -30,8 +30,9 @@ public class GameView extends SurfaceView implements Callback
     GameOverLayer gol;// 游戏结束的画面
     public boolean gameLoop;// 游戏是否循环
 
-    public GameView(Context context)
-    {
+    private Bitmap mBackground;
+
+    public GameView(Context context) {
         super(context);
         mHolder = getHolder();
         mHolder.addCallback(this);
@@ -43,12 +44,13 @@ public class GameView extends SurfaceView implements Callback
                 GAMEOVER_LAYER_HEIGHT);
         //传递当前context到ActivityUtil工具类中
         ActivityUtil.myContext = context;
+        mBackground = ActivityUtil.returnPic("background5", context);
     }
+
     /**
      * 初始化游戏对象的数据
      */
-    public void initGameObjData()
-    {
+    public void initGameObjData() {
         //设定游戏循环为真
         gameLoop = true;
         //设定当前游戏当前运行状态为运行
@@ -56,12 +58,10 @@ public class GameView extends SurfaceView implements Callback
     }
 
     public void surfaceChanged(SurfaceHolder holder, int format, int width,
-                               int height)
-    {
+                               int height) {
     }
 
-    public void surfaceCreated(SurfaceHolder holder)
-    {
+    public void surfaceCreated(SurfaceHolder holder) {
         //生成 游戏线程
         mThread = new GameThread(this);
         mThread.start();
@@ -70,17 +70,15 @@ public class GameView extends SurfaceView implements Callback
     /**
      * 绘制游戏元素
      */
-    public void doPaint()
-    {
+    public void doPaint() {
         Canvas c = mHolder.lockCanvas();
         //c.drawColor(Color.WHITE);
 
         //绘制背景
-        c.drawBitmap(ActivityUtil.returnPic("background5", ActivityUtil.myContext),
-                null,new Rect(0,0,ActivityUtil.SCREEN_WIDTH,ActivityUtil.SCREEN_HEIGHT),
+        c.drawBitmap(mBackground,
+                null, new Rect(0, 0, ActivityUtil.SCREEN_WIDTH, ActivityUtil.SCREEN_HEIGHT),
                 new Paint());
-        switch (GameObjData.CURRENT_GAME_STATE)
-        {
+        switch (GameObjData.CURRENT_GAME_STATE) {
             case GAME_STATE_RUN:
                 mMainLayer.paint(c);
                 break;
@@ -89,8 +87,7 @@ public class GameView extends SurfaceView implements Callback
             case GAME_STATE_OVER:
                 mMainLayer.paint(c);
                 gol.paint(c);
-                if (gol.appearFull)
-                {
+                if (gol.appearFull) {
                     gameLoop = false;
                 }
                 break;
@@ -101,12 +98,10 @@ public class GameView extends SurfaceView implements Callback
     /**
      * 更新游戏元素数据
      */
-    public void doUpdate()
-    {
+    public void doUpdate() {
         //检查游戏是否结束
         GameObjData.checkGameOver();
-        switch (GameObjData.CURRENT_GAME_STATE)
-        {
+        switch (GameObjData.CURRENT_GAME_STATE) {
             case GAME_STATE_RUN:
                 mMainLayer.logic();
                 break;
@@ -116,16 +111,13 @@ public class GameView extends SurfaceView implements Callback
         }
     }
 
-    public void surfaceDestroyed(SurfaceHolder holder)
-    {
+    public void surfaceDestroyed(SurfaceHolder holder) {
         gameLoop = false;
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event)
-    {
-        switch (GameObjData.CURRENT_GAME_STATE)
-        {
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (GameObjData.CURRENT_GAME_STATE) {
             case GAME_STATE_RUN:
                 mMainLayer.onTouch(event);
                 break;

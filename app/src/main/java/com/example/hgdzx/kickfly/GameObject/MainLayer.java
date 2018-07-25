@@ -11,6 +11,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.MotionEvent;
 
+import java.util.LinkedList;
+
 public class MainLayer extends Layer {
 
     private static final int LIVE_FLY_COUNT = 50; // 屏幕中最多存活的苍蝇数量
@@ -20,6 +22,7 @@ public class MainLayer extends Layer {
     private Paint mFillPaint;
     private Paint mStrokePaint;
     private Context mContext;
+    private LinkedList<Long> mFrameTimestamps = new LinkedList<>();
 
     public MainLayer(int x, int y, int w, int h, Context context) {
         super(x, y, w, h);
@@ -68,6 +71,10 @@ public class MainLayer extends Layer {
             GameObjData.CURRENT_USE_TIME++;
             lastUpdate = now;
         }
+        mFrameTimestamps.addLast(now);
+        while (mFrameTimestamps.getFirst() < now - 1000) {
+            mFrameTimestamps.removeFirst();
+        }
     }
 
     @Override
@@ -79,6 +86,9 @@ public class MainLayer extends Layer {
         text = "用时: " + GameObjData.CURRENT_USE_TIME;
         c.drawText(text, toPixel(8), toPixel(40), mStrokePaint);
         c.drawText(text, toPixel(8), toPixel(40), mFillPaint);
+        text = "FPS: " + mFrameTimestamps.size();
+        c.drawText(text, toPixel(8), toPixel(57), mStrokePaint);
+        c.drawText(text, toPixel(8), toPixel(57), mFillPaint);
     }
 
     public void onTouch(MotionEvent event) {
