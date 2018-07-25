@@ -38,14 +38,6 @@ public class GameView extends SurfaceView implements Callback
         //设定主绘图层的大小
         mMainLayer = new MainLayer(0, 0, ActivityUtil.SCREEN_WIDTH,
                 ActivityUtil.SCREEN_HEIGHT);
-
-//		int gol_x = (ActivityUtil.SCREEN_WIDTH - GAMEOVER_LAYER_WIDTH) / 2;
-//		int gol_y = (ActivityUtil.SCREEN_HEIGHT - GAMEOVER_LAYER_HEIGHT) / 2;
-//		Log.i("debug", "gol_x:"+gol_x+"-gol_y:"+gol_y);
-
-//		gol = new GameOverLayer(gol_x, gol_y, GAMEOVER_LAYER_WIDTH,
-//				GAMEOVER_LAYER_HEIGHT);
-
         //生成结束层
         gol = new GameOverLayer(0, 0, GAMEOVER_LAYER_WIDTH,
                 GAMEOVER_LAYER_HEIGHT);

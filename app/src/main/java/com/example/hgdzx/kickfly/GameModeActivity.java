@@ -19,13 +19,13 @@ public class GameModeActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         // 全屏并且没有Title
         ActivityUtil.fullLandScapeScreen(this);
-        setContentView(R.layout.options);
+        setContentView(R.layout.gamemode);
 
-//		btn_mode_100c = (Button) findViewById(R.id.btn_mode_100c);
-//		btn_mode_100s = (Button) findViewById(R.id.btn_mode_100s);
-//
-//		btn_mode_100c.setOnClickListener(this);
-//		btn_mode_100s.setOnClickListener(this);
+		btn_mode_100c =  findViewById(R.id.btn_mode_100c);
+		btn_mode_100s =  findViewById(R.id.btn_mode_100s);
+
+		btn_mode_100c.setOnClickListener(this);
+		btn_mode_100s.setOnClickListener(this);
 
     }
 

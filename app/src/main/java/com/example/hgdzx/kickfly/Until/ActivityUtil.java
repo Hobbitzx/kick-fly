@@ -18,17 +18,6 @@ public class ActivityUtil
     public static int SCREEN_DPI;
     public static Context myContext;
     public final static String infoMessage="DebugInfo";
-    public static void noTitleBar(Activity activity)
-    {
-        activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
-    }
-
-    public static void noNotificationBar(Activity activity)
-    {
-        final Window win = activity.getWindow();
-        win.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-    }
 
     /**
      * 设置全屏及横屏显示
@@ -64,23 +53,5 @@ public class ActivityUtil
                 null);
         return BitmapFactory.decodeResource(context.getResources(),
                 indentify);
-    }
-    //震动
-    public static void getVibrator(Context context)
-    {
-        Vibrator vibrator = (Vibrator)context.getSystemService("vibrator");
-        long[] pattern = {800, 40,400, 30}; // OFF/ON/OFF/ON...
-        vibrator.vibrate(pattern, 2);//-1不重复，非-1为从pattern的指定下标开始重复
-    }
-    //停顿指定时间
-    public static void SleepTime(int time)
-    {
-        try
-        {
-            Thread.sleep(time);
-        } catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
     }
 }

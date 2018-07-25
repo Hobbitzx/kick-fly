@@ -82,7 +82,6 @@ public class GameMainView extends View
                 Thread ButtonMusicThread = new Thread(
                         new ButtonMusicHandler());
                 ButtonMusicThread.start();
-                ActivityUtil.SleepTime(1000);
                 // 转向到继续游戏
                 Intent intent = new Intent();
                 intent.setClass(getContext(), GameModeActivity.class);
