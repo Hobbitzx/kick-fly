@@ -61,16 +61,12 @@ public class GameMainView extends View
             // 点击到开始按钮
             if (StartRect.contains(ax, ay))
             {
-                // 启动“开始按钮声音线程”线程
-                Thread ButtonMusicThread = new Thread(
-                        new ButtonMusicHandler());
-                ButtonMusicThread.start();
-                // ActivityUtil.PlaySoundPool(myContext, R.raw.music3);
+
 
                 // 转向到继续游戏
                 Intent intent = new Intent();
                 intent.setClass(getContext(), KickFly.class);
-                // 设定游戏的模式为打死一百虫子就结束
+                // 设定游戏的模式为打死30只虫子就结束
                 GameObjData.CURRENT_GAME_MODE = GameObjData.MODE_100C;
                 // 转向登陆后的页面
                 getContext().startActivity(intent);
@@ -78,10 +74,6 @@ public class GameMainView extends View
             // 点击到设置按钮
             if (SetRect.contains(ax, ay))
             {
-                // 开始按钮声音线程线程
-                Thread ButtonMusicThread = new Thread(
-                        new ButtonMusicHandler());
-                ButtonMusicThread.start();
                 // 转向到继续游戏
                 Intent intent = new Intent();
                 intent.setClass(getContext(), GameModeActivity.class);
@@ -100,7 +92,7 @@ public class GameMainView extends View
         {
             try
             {
-                Thread.sleep(4000);
+                Thread.sleep(500);
             } catch (InterruptedException e)
             {
                 e.printStackTrace();

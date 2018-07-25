@@ -97,9 +97,6 @@ public class MainLayer extends Layer {
 
         // 播放声音
         AudioUtil.PlayMusic(ActivityUtil.myContext, R.raw.musickill);
-        //ActivityUtil.PlaySoundPool(ActivityUtil.myContext,  R.raw.music3);
-        // 震动一下
-        // ActivityUtil.getVibrator(ActivityUtil.myContext);
         synchronized (objs) {
             for (BaseGameObj obj : objs) {
                 Fly f = (Fly) obj;
