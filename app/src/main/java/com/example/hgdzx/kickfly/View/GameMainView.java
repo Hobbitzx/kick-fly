@@ -102,12 +102,4 @@ public class GameMainView extends View
         }
     }
 
-    class ButtonMusicHandler implements Runnable
-    {
-        public void run()
-        {
-            // 播放声音
-            AudioUtil.PlayMusicLoop(myContext, R.raw.musicbutton);
-        }
-    }
 }

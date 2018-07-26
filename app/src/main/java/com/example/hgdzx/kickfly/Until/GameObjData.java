@@ -3,7 +3,7 @@ package com.example.hgdzx.kickfly.Until;
 import com.example.hgdzx.kickfly.View.GameView;
 
 /**
- * 娓告垙鏁版嵁
+ * 游戏数据
  */
 public final class GameObjData
 {
